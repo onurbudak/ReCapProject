@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class CarManager : ICarService<Car>
+    public class CarManager : ICarService
     {
         ICarDal _carDal;
 
