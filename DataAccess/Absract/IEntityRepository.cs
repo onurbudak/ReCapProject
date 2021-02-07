@@ -1,16 +1,17 @@
 ﻿using Entities.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Absract
 {
-    public interface IEntityRepository<TEntity> where TEntity: class, IEntity, new()
+    public interface IEntityRepository<T> where T: class, IEntity, new()
     {
-        void Add(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TEntity entity);
-        List<TEntity> GetAll();
-        TEntity GetById(int id);
+        List<T> GetAll(Expression<Func<T, bool>> filter = null);
+        T Get(Expression<Func<T, bool>> filter);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 }

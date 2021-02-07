@@ -18,27 +18,31 @@ namespace Business.Concrete
 
         public void Add(Car entity)
         {
-            _carDal.Add(entity);
-        }
-
-        public void Delete(Car entity)
-        {
-            _carDal.Delete(entity);
-        }
+            if(entity.Descriptions.Length > 1 && entity.DailyPrice > 0)
+            {
+                _carDal.Add(entity);
+            }
+            else
+            {
+                Console.WriteLine("Lütfen Ekleme Kısıtlarına Uyunuz!!");
+            }
+           
+        } 
 
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public Car GetById(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetById(id);
+            return _carDal.GetAll(p => p.BrandId == brandId);
         }
 
-        public void Update(Car entity)
+        public List<Car> GetCarsByColorId(int colorId)
         {
-            _carDal.Update(entity);
+            return _carDal.GetAll(p => p.ColorId == colorId);
         }
+
     }
 }
