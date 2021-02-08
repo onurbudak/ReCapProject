@@ -18,7 +18,7 @@ namespace ConsoleUI
 
             //ColorCrudMethods();
 
-            BrandCrudMethods();
+            //BrandCrudMethods();
 
         }
 
@@ -33,19 +33,19 @@ namespace ConsoleUI
             var brandEntity = brandManager.Get(2);
             Console.WriteLine("{0} {1}", brandEntity.BrandId, brandEntity.BrandName);
             Console.WriteLine("-------------------------------------------------------------------------");
-            brandManager.Add(new Brand { BrandName = "Skoda" });
+            brandManager.Add(new Brand { BrandName = "Aston Martin" });
             foreach (var brand in brandManager.GetAll())
             {
                 Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
             }
             Console.WriteLine("-------------------------------------------------------------------------");
-            brandManager.Update(new Brand { BrandId = 2, BrandName = "Seat" });
+            brandManager.Update(new Brand { BrandId = 1005, BrandName = "Seat" });
             foreach (var brand in brandManager.GetAll())
             {
                 Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
             }
             Console.WriteLine("-------------------------------------------------------------------------");
-            brandManager.Delete(new Brand { BrandId = 1003, BrandName = "Audi" });
+            brandManager.Delete(new Brand { BrandId = 1004, BrandName = "Audi" });
             foreach (var brand in brandManager.GetAll())
             {
                 Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
