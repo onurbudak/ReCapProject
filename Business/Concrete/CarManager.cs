@@ -27,12 +27,30 @@ namespace Business.Concrete
                 Console.WriteLine("Lütfen Ekleme Kısıtlarına Uyunuz!!");
             }
            
-        } 
+        }
+
+        public void Update(Car entity)
+        {
+            _carDal.Update(entity);
+
+        }
+
+        public void Delete(Car entity)
+        {
+            _carDal.Delete(entity);
+
+        }
 
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
+
+        public Car Get(int id)
+        {
+            return _carDal.Get(c => c.CarId == id);
+        }
+
 
         public List<Car> GetCarsByBrandId(int brandId)
         {
