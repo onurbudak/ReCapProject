@@ -22,6 +22,7 @@ namespace ConsoleUI
 
             GetCarDetailsTest();
 
+
         }
 
         private static void GetCarDetailsTest()
