@@ -1,5 +1,6 @@
 ﻿using DataAccess.Absract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace DataAccess.Concrete.InMemory
         public InMemoryCarDal()
         {
             _cars = new List<Car> {
-                new Car{ CarId=1, BrandId=1, ColorId=1, DailyPrice=150, ModelYear="2015", Descriptions="Dizel"},
-                new Car{ CarId=2, BrandId=1, ColorId=2, DailyPrice=250, ModelYear="2012", Descriptions="Dizel"},
-                new Car{ CarId=3, BrandId=2, ColorId=3, DailyPrice=350, ModelYear="2016", Descriptions="Benzinli"},
-                new Car{ CarId=4, BrandId=2, ColorId=2, DailyPrice=80, ModelYear="2018", Descriptions="Benzinli"},
-                new Car{ CarId=5, BrandId=3, ColorId=1, DailyPrice=120, ModelYear="2019", Descriptions="Benzinli"},
+                new Car{ CarId=1, BrandId=1, ColorId=1,Name="Elantra", DailyPrice=150, ModelYear="2015", Descriptions="Dizel"},
+                new Car{ CarId=2, BrandId=1, ColorId=2,Name="Elantra", DailyPrice=250, ModelYear="2012", Descriptions="Dizel"},
+                new Car{ CarId=3, BrandId=2, ColorId=3, Name="Elantra",DailyPrice=350, ModelYear="2016", Descriptions="Benzinli"},
+                new Car{ CarId=4, BrandId=2, ColorId=2, Name="Elantra",DailyPrice=80, ModelYear="2018", Descriptions="Benzinli"},
+                new Car{ CarId=5, BrandId=3, ColorId=1,Name="Elantra", DailyPrice=120, ModelYear="2019", Descriptions="Benzinli"},
             };
         }
         public void Add(Car car)
@@ -59,6 +60,11 @@ namespace DataAccess.Concrete.InMemory
         }
 
         public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
         {
             throw new NotImplementedException();
         }

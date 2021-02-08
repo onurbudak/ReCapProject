@@ -31,13 +31,13 @@ INSERT INTO Colors(ColorName) VALUES
 	('Siyah');
 
 INSERT INTO Brands(BrandName) VALUES
-	('Mercedes'),
-	('Seat'),
-	('Bugatti');
+	('Fiat'),
+	('Hyundai'),
+	('Nissan');
 	
 	
 INSERT INTO Cars(BrandID,ColorID,Name,ModelYear,DailyPrice,Descriptions) VALUES
-	('2','1','Passat','2013','130','Benzin'),
-	('2','2','Doğan Slx','2015','250','Dizel'),
-	('3','3','Accent','2017','400','Benzin'),
-	('1','2','Elantra','2019','625','Dizel');
+	('1','1','Linea','2013','130','Benzin'),
+	('1','2','Egea','2015','250','Dizel'),
+	('2','1','Accent','2017','400','Benzin'),
+	('2','2','i20','2019','625','Dizel');
