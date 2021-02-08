@@ -14,7 +14,67 @@ namespace ConsoleUI
 
             //EfCarDalMethod();
 
-            CarCrudMethods();
+            //CarCrudMethods();
+
+            //ColorCrudMethods();
+
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
+            }
+            Console.WriteLine("-------------------------------------------------------------------------");
+            var brandEntity = brandManager.Get(2);
+            Console.WriteLine("{0} {1}", brandEntity.BrandId, brandEntity.BrandName);
+            Console.WriteLine("-------------------------------------------------------------------------");
+            brandManager.Add(new Brand { BrandName = "Skoda" });
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
+            }
+            Console.WriteLine("-------------------------------------------------------------------------");
+            brandManager.Update(new Brand { BrandId = 2, BrandName = "Seat" });
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
+            }
+            Console.WriteLine("-------------------------------------------------------------------------");
+            brandManager.Delete(new Brand { BrandId = 1003, BrandName = "Audi" });
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
+            }
+
+        }
+
+        private static void ColorCrudMethods()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", color.ColorId, color.ColorName);
+            }
+            Console.WriteLine("-------------------------------------------------------------------------");
+            var colorEntity = colorManager.Get(2);
+            Console.WriteLine("{0} {1}", colorEntity.ColorId, colorEntity.ColorName);
+            Console.WriteLine("-------------------------------------------------------------------------");
+            colorManager.Add(new Color { ColorName = "Turuncu" });
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", color.ColorId, color.ColorName);
+            }
+            Console.WriteLine("-------------------------------------------------------------------------");
+            colorManager.Update(new Color { ColorId = 1003, ColorName = "Mor" });
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", color.ColorId, color.ColorName);
+            }
+            Console.WriteLine("-------------------------------------------------------------------------");
+            colorManager.Delete(new Color { ColorId = 1002, ColorName = "Mor" });
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine("{0} {1}", color.ColorId, color.ColorName);
+            }
         }
 
         private static void CarCrudMethods()

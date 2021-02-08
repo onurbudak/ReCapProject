@@ -30,8 +30,8 @@ INSERT INTO Colors(ColorName) VALUES
 
 INSERT INTO Brands(BrandName) VALUES
 	('Mercedes'),
-	('Doğan'),
-	('Renault');
+	('Seat'),
+	('Bugatti');
 	
 	
 INSERT INTO Cars(BrandID,ColorID,ModelYear,DailyPrice,Descriptions) VALUES
