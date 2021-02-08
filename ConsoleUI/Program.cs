@@ -18,6 +18,12 @@ namespace ConsoleUI
 
             //ColorCrudMethods();
 
+            BrandCrudMethods();
+
+        }
+
+        private static void BrandCrudMethods()
+        {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             foreach (var brand in brandManager.GetAll())
             {
@@ -44,7 +50,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine("{0} {1}", brand.BrandId, brand.BrandName);
             }
-
         }
 
         private static void ColorCrudMethods()
