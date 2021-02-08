@@ -10,6 +10,9 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+           
+            GetCarDetailsTest();
+
             //InMemoryMethod();
 
             //EfCarDalMethod();
@@ -19,8 +22,6 @@ namespace ConsoleUI
             //ColorCrudMethods();
 
             //BrandCrudMethods();
-
-            GetCarDetailsTest();
 
 
         }
