@@ -10,8 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-           
-            GetCarDetailsTest();
+            //GetCarDetailsTest();
 
             //InMemoryMethod();
 
@@ -23,7 +22,20 @@ namespace ConsoleUI
 
             //BrandCrudMethods();
 
+            UserCrudMethods();
 
+
+
+        }
+
+        private static void UserCrudMethods()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.GetAll();
+            foreach (var user in result.Data)
+            {
+                Console.WriteLine("{0} {1} {2} {3} {4}", user.Id, user.Firstname, user.LastName, user.Email, user.Password);
+            }
         }
 
         private static void GetCarDetailsTest()
