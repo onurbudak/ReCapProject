@@ -38,7 +38,7 @@ namespace ConsoleUI
                 Console.WriteLine("{0} {1} {2} {3} {4}", rental.Id, rental.CarId, rental.CustomerId, rental.RentDate, rental.ReturnDate);
             }
 
-            Console.WriteLine( rentalManager.Add(new Rental { CarId = 2, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null }).Message);
+            Console.WriteLine( rentalManager.Add(new Rental { CarId = 4, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = null }).Message);
 
             var result2 = rentalManager.GetAll();
             foreach (var rental in result2.Data)
