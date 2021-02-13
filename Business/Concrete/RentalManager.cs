@@ -19,17 +19,18 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId && r.ReturnDate != null);
-            if (result.Count > 0)
+
+            var resultData = _rentalDal.GetRentACarDetail(r => r.CarId == rental.CarId);
+
+            var result = resultData.Find(r => r.ReturnDate == null);
+
+            if (result == null)
             {
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.RentalAdded);
+            }
 
-            }
-            else
-            {
-                return new ErrorResult(Messages.RentalNameInvalid);
-            }
+            return new ErrorResult(Messages.RentalNameInvalid);
 
         }
 
