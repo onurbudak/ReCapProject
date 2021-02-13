@@ -81,6 +81,6 @@ INSERT INTO Customers(UserId,CompanyName) VALUES
 INSERT INTO Rentals(CarId,CustomerId,RentDate,ReturnDate) VALUES
 	(1,1,'2021-01-05','2021-01-08'),
 	(2,2,'2021-02-07','2021-02-09'),
-	(3,3,'2021-02-10','2021-02-13');
+	(3,3,'2021-02-10',null);
 	
 	
