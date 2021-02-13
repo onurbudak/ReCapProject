@@ -22,10 +22,31 @@ namespace ConsoleUI
 
             //BrandCrudMethods();
 
-            UserCrudMethods();
+            //UserCrudMethods();
 
+            //CustomerCrudMehods();
 
+            //RentalCrudMethods();
+        }
 
+        private static void RentalCrudMethods()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result = rentalManager.GetAll();
+            foreach (var rental in result.Data)
+            {
+                Console.WriteLine("{0} {1} {2} {3} {4}", rental.Id, rental.CarId, rental.CustomerId, rental.RentDate, rental.ReturnDate);
+            }
+        }
+
+        private static void CustomerCrudMehods()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result = customerManager.GetAll();
+            foreach (var customer in result.Data)
+            {
+                Console.WriteLine("{0} {1} {2}", customer.Id, customer.UserId, customer.CompanyName);
+            }
         }
 
         private static void UserCrudMethods()

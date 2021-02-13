@@ -39,14 +39,13 @@ namespace Business.Concrete
 
         public IDataResult<Customer> Get(int id)
         {
-            _customerDal.GetAll();
-            return new SuccessDataResult<Customer>(Messages.CustomerListed);
+            return new SuccessDataResult<Customer>(_customerDal.Get(r => r.Id == id), Messages.CustomerListed);
         }
 
         public IDataResult<List<Customer>> GetAll()
         {
-            _customerDal.GetAll();
-            return new SuccessDataResult<List<Customer>>(Messages.CustomerListed);
+           
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(),Messages.CustomerListed);
         }
 
         public IResult Update(Customer entity)
