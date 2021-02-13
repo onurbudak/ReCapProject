@@ -26,7 +26,7 @@ namespace ConsoleUI
 
             //CustomerCrudMehods();
 
-            //RentalCrudMethods();
+            RentalCrudMethods();
         }
 
         private static void RentalCrudMethods()
@@ -34,6 +34,14 @@ namespace ConsoleUI
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             var result = rentalManager.GetAll();
             foreach (var rental in result.Data)
+            {
+                Console.WriteLine("{0} {1} {2} {3} {4}", rental.Id, rental.CarId, rental.CustomerId, rental.RentDate, rental.ReturnDate);
+            }
+
+            Console.WriteLine( rentalManager.Add(new Rental { CarId = 1, CustomerId = 2, RentDate = DateTime.Now, ReturnDate = DateTime.Now }).Message);
+
+            var result2 = rentalManager.GetAll();
+            foreach (var rental in result2.Data)
             {
                 Console.WriteLine("{0} {1} {2} {3} {4}", rental.Id, rental.CarId, rental.CustomerId, rental.RentDate, rental.ReturnDate);
             }
