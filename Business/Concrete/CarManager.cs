@@ -78,11 +78,12 @@ namespace Business.Concrete
         {
             if (DateTime.Now.Hour == 15)
             {
-                return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
             else
             {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+               
+                return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
             }
 
         }

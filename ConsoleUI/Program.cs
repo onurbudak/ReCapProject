@@ -10,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //GetCarDetailsTest();
+            GetCarDetailsTest();
 
             //InMemoryMethod();
 
@@ -26,7 +26,7 @@ namespace ConsoleUI
 
             //CustomerCrudMehods();
 
-            RentalCrudMethods();
+            //RentalCrudMethods();
         }
 
         private static void RentalCrudMethods()
