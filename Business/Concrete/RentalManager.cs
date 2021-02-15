@@ -20,9 +20,9 @@ namespace Business.Concrete
         public IResult Add(Rental rental)
         {
 
-            var resultData = _rentalDal.GetRentACarDetail(r => r.CarId == rental.CarId);
+            var resultDatas = _rentalDal.GetRentACarDetail(r => r.CarId == rental.CarId);
 
-            var result = resultData.Find(r => r.ReturnDate == null);
+            var result = resultDatas.Find(r => r.ReturnDate == null);
 
             if (result == null)
             {
