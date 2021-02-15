@@ -36,9 +36,9 @@ namespace Business.Concrete
 
         public IResult Delete(Rental rental)
         {
-            if (rental.CarId > 2)
+            if (rental.CarId > 0)
             {
-                _rentalDal.Add(rental);
+                _rentalDal.Delete(rental);
                 return new SuccessResult(Messages.RentalDeleted);
             }
             return new ErrorResult(Messages.RentalNameInvalid);
@@ -56,9 +56,9 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            if (rental.CarId > 2)
+            if (rental.CarId > 0)
             {
-                _rentalDal.Add(rental);
+                _rentalDal.Update(rental);
                 return new SuccessResult(Messages.RentalUpdated);
             }
             return new ErrorResult(Messages.RentalNameInvalid);
