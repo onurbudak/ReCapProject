@@ -30,5 +30,8 @@ namespace Business.Constants
         public static string RentalUpdated = "Araba Kiralama  Güncellendi";
         public static string RentalNameInvalid = "Araba Kiralama gerçekleşmedi";
         public static string RentalListed = "Araba Kiralama  Listelendi";
+
+        public static string FileExtensionInvalid = "Lütfen geçerli dosya formatı seçiniz";
+        public static string CarImageLimitExceded = "Aynı arabaya ait en fazla 5 resim yüklenebilir";
     }
 }

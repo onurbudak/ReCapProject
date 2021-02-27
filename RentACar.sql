@@ -52,6 +52,15 @@ CREATE TABLE [dbo].[Rentals] (
     FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customers] ([Id])
 );
 
+CREATE TABLE [dbo].[CarImages ] (
+    [Id]        INT           IDENTITY (1, 1) NOT NULL,
+    [CarId]      INT           NULL,
+    [ImagePath]  NVARCHAR (1000) NULL,
+    [ImageDate]   DATETIME NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+	FOREIGN KEY ([CarId]) REFERENCES [dbo].[Cars] ([Id])
+);
+
 INSERT INTO Colors(ColorName) VALUES
 	('Kırmızı'),
 	('Mavi'),
