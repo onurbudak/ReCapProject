@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.FileHelpers
 {
-    public static class FileHelper
+    public class FileHelper
     {
         public static string SaveFile(IFormFile formFile, string [] fileExtensions)
         {
