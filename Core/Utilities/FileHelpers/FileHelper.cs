@@ -110,7 +110,7 @@ namespace Core.Utilities.FileHelpers
 
         public static byte[] DefaultFileData()
         {
-            var defaultFileDataPath = FilePathCreator() + "default.png";
+            var defaultFileDataPath = FilePathCreator() + "default.jpeg";
             var getFileData = GetFileData(defaultFileDataPath);
             return getFileData;
         }
