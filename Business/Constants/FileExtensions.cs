@@ -6,6 +6,6 @@ namespace Business.Constants
 {
     public static class FileExtensions
     {
-        public static string[] ImageFileExtension = { ".JPEG", ".PNG", ".BMP", ".JPG", ".TIFF", ".SVG" };
+        public static string[] ImageFileExtensions = { ".JPEG", ".PNG", ".BMP", ".JPG", ".TIFF", ".SVG" };
     }
 }

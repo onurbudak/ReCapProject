@@ -41,7 +41,7 @@ namespace Business.Concrete
             {
                 return result;
             }
-            var imagePath = FileHelper.SaveFile(formFile, FileExtensions.ImageFileExtension);
+            var imagePath = FileHelper.SaveFile(formFile, FileExtensions.ImageFileExtensions);
             if (imagePath != null)
             {
                 carImage.ImagePath = imagePath;
@@ -58,7 +58,7 @@ namespace Business.Concrete
             {
                 return result;
             }
-            var imagePath = FileHelper.UpdateFile(formFile, carImage.ImagePath, FileExtensions.ImageFileExtension);
+            var imagePath = FileHelper.UpdateFile(formFile, carImage.ImagePath, FileExtensions.ImageFileExtensions);
             if (imagePath != null)
             {
                 carImage.ImagePath = imagePath;
