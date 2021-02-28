@@ -57,7 +57,7 @@ namespace Core.Utilities.FileHelpers
         public static byte[] GetFileData(string filePath)
         {
             byte[] byteArray = null;
-            var result = File.Open(filePath, FileMode.Open,FileAccess.Read);
+            var result = File.OpenRead(filePath);
             if (result.Length > 0)
             {
                 using (var streamReader = new MemoryStream())
