@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.FileHelpers;
 using Core.Utilities.Results;
@@ -34,6 +36,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult SaveFile(IFormFile formFile, CarImage carImage)
         {
             var result = BusinessRules.Run(CheckIfCarImageLimitExceded(carImage));
