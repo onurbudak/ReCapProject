@@ -41,7 +41,7 @@ namespace Business.Concrete
             {
                 return result;
             }
-            var imagePath = FileHelper.SaveFile(formFile);
+            var imagePath = FileHelper.SaveFile(formFile, Messages.ImageFileExtension);
             if (imagePath != null)
             {
                 carImage.ImagePath = imagePath;
@@ -58,7 +58,7 @@ namespace Business.Concrete
             {
                 return result;
             }
-            var imagePath = FileHelper.UpdateFile(formFile, carImage.ImagePath);
+            var imagePath = FileHelper.UpdateFile(formFile, carImage.ImagePath, Messages.ImageFileExtension);
             if (imagePath != null)
             {
                 carImage.ImagePath = imagePath;
@@ -67,6 +67,7 @@ namespace Business.Concrete
             }
             return new ErrorResult(Messages.FilePathInvalid);
         }
+
         public IResult DeleteFile(CarImage carImage)
         {
             var isDelete = FileHelper.DeleteFile(carImage.ImagePath);

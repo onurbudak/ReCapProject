@@ -10,11 +10,11 @@ namespace Core.Utilities.FileHelpers
 {
     public static class FileHelper
     {
-        public static string SaveFile(IFormFile formFile)
+        public static string SaveFile(IFormFile formFile, string [] fileExtensions)
         {
             if (formFile != null)
             {
-                var extension = CheckFileExtension(formFile);
+                var extension = CheckFileExtension(formFile, fileExtensions);
                 if (extension)
                 {
                     var filePath = FilePathCreator();
@@ -32,12 +32,12 @@ namespace Core.Utilities.FileHelpers
             return null;
         }
 
-        public static string UpdateFile(IFormFile formFile,string filePath)
+        public static string UpdateFile(IFormFile formFile, string filePath, string [] fileExtensions)
         {
             var isDelete = DeleteFile(filePath);
             if (isDelete)
             {
-                var fullFilePath = SaveFile(formFile);
+                var fullFilePath = SaveFile(formFile, fileExtensions);
                 return fullFilePath;
             }
             return null;
@@ -71,11 +71,9 @@ namespace Core.Utilities.FileHelpers
         }
 
        
-        private static bool CheckFileExtension(IFormFile formFile)
+        private static bool CheckFileExtension(IFormFile formFile, string [] fileExtensions)
         {
-            List<string> fileExtensions = new List<string> { ".JPEG", ".PNG", ".BMP", ".JPG", ".TIFF", ".SVG" };
-            var fileInfo = new FileInfo(formFile.FileName);
-            var fileExtension = fileInfo.Extension.ToUpper();
+            var fileExtension = Path.GetExtension(formFile.FileName).ToUpper();
             var result = fileExtensions.Any(f => f == fileExtension);
             if (result)
             {
@@ -94,17 +92,17 @@ namespace Core.Utilities.FileHelpers
 
         private static string FilePathCreator()
         {
-            var fileRootName = @"\wwwroot\Images\";
-            var fileRootPath = Directory.GetCurrentDirectory();
+            var fileRootName = @"Images\";
+            var fileRootPath = Directory.GetCurrentDirectory() + @"\wwwroot\";
             var createdFilePath = fileRootPath + fileRootName;
             return createdFilePath;
         }
 
         private static string FileNameCreator(string fileName)
         {
-            var fileInfo = new FileInfo(fileName);
+            var fileExtension = Path.GetExtension(fileName);
             var randomGuid = Guid.NewGuid().ToString("N");
-            var createdFileName = randomGuid + fileInfo.Extension;
+            var createdFileName = randomGuid + fileExtension;
             return createdFileName;
         }
 

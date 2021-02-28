@@ -34,5 +34,7 @@ namespace Business.Constants
         public static string FileExtensionInvalid = "Lütfen geçerli dosya formatı seçiniz";
         public static string CarImageLimitExceded = "Aynı arabaya ait en fazla 5 resim yüklenebilir";
         public static string FilePathInvalid = "Geçersiz dosya yolu";
+
+        public static string [] ImageFileExtension = { ".JPEG", ".PNG", ".BMP", ".JPG", ".TIFF", ".SVG" };
     }
 }
