@@ -20,6 +20,6 @@ namespace Business.Abstract
         IResult SaveFile(IFormFile formFile, CarImage carImage);
         IResult DeleteFile(CarImage carImage);
         IResult UpdateFile(IFormFile formFile, CarImage carImage);
-        IDataResult<List<Stream>> GetFileData(List<IFormFile> formFile, CarImage carImage);
+        IDataResult<List<byte[]>> GetFileData(CarImage carImage);
     }
 }

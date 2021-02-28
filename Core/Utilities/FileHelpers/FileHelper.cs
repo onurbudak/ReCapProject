@@ -21,14 +21,21 @@ namespace Core.Utilities.FileHelpers
             return false;
         }
 
-        public static Stream GetFileData(string imagePath)
+        public static byte[] GetFileData(string imagePath)
         {
-            var result = File.Open(imagePath, FileMode.Open);
+            byte[] byteArray = null;
+            var result = File.OpenRead(imagePath);     
             if (result.Length > 0)
             {
-                return result;
+                
+                using (var streamReader = new MemoryStream())
+                {
+                    result.CopyTo(streamReader);
+                    byteArray = streamReader.ToArray();
+                }
+                return byteArray;              
             }
-            return result;
+            return byteArray;
         }
 
         public static string SaveImage(IFormFile formFile)

@@ -46,13 +46,16 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getFileData")]
-        public IActionResult GetFileData(List<IFormFile> formFile, [FromForm] CarImage carImage)
+        public IActionResult GetFileData([FromForm] CarImage carImage)
         {
-
-            var result = _carImageService.GetFileData(formFile, carImage);
-            if (result.Success)
+            var result = _carImageService.GetFileData(carImage).Data;
+            if (result.Count > 0)
             {
-                return Ok(result);
+                foreach (var byteData in result)
+                {                 
+                    //return Ok(result);
+                    return File(byteData, "image/png");
+                }
             }
             return BadRequest(result);
         }

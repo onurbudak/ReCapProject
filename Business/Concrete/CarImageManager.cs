@@ -82,9 +82,9 @@ namespace Business.Concrete
             return new ErrorResult(Messages.FilePathInvalid);
         }
 
-        public IDataResult<List<Stream>> GetFileData(List<IFormFile> formFile, CarImage carImage)
+        public IDataResult<List<byte[]>> GetFileData(CarImage carImage)
         {
-            List<Stream> carImageViewList = new List<Stream>();
+            List<byte[]> carImageViewList = new List<byte[]>();
             var carImageDatas = _carImageDal.GetAll(c => c.CarId == carImage.CarId);
             if (carImageDatas.Count > 0)
             {
@@ -96,9 +96,9 @@ namespace Business.Concrete
                         carImageViewList.Add(result);
                     }
                 }
-                return new SuccessDataResult<List<Stream>>(carImageViewList);
+                return new SuccessDataResult<List<byte[]>>(carImageViewList);
             }
-            return new ErrorDataResult<List<Stream>>(carImageViewList);
+            return new ErrorDataResult<List<byte[]>>(carImageViewList);
         }
 
         public IDataResult<CarImage> Get(int id)
