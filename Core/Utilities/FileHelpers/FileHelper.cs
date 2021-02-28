@@ -10,35 +10,7 @@ namespace Core.Utilities.FileHelpers
 {
     public static class FileHelper
     {
-        public static bool DeleteImage(string imagePath)
-        {
-            var exist = File.Exists(imagePath);
-            if (exist)
-            {
-                File.Delete(imagePath);
-                return true;
-            }
-            return false;
-        }
-
-        public static byte[] GetFileData(string imagePath)
-        {
-            byte[] byteArray = null;
-            var result = File.OpenRead(imagePath);     
-            if (result.Length > 0)
-            {
-                
-                using (var streamReader = new MemoryStream())
-                {
-                    result.CopyTo(streamReader);
-                    byteArray = streamReader.ToArray();
-                }
-                return byteArray;              
-            }
-            return byteArray;
-        }
-
-        public static string SaveImage(IFormFile formFile)
+        public static string SaveFile(IFormFile formFile)
         {
             if (formFile != null)
             {
@@ -60,10 +32,49 @@ namespace Core.Utilities.FileHelpers
             return null;
         }
 
-        private static bool CheckFileExtension(IFormFile imageFile)
+        public static string UpdateFile(IFormFile formFile,string filePath)
+        {
+            var isDelete = DeleteFile(filePath);
+            if (isDelete)
+            {
+                var fullFilePath = SaveFile(formFile);
+                return fullFilePath;
+            }
+            return null;
+        }
+
+        public static bool DeleteFile(string filePath)
+        {
+            var exist = File.Exists(filePath);
+            if (exist)
+            {
+                File.Delete(filePath);
+                return exist;
+            }
+            return exist;
+        }
+
+        public static byte[] GetFileData(string filePath)
+        {
+            byte[] byteArray = null;
+            var result = File.Open(filePath, FileMode.Open,FileAccess.Read);
+            if (result.Length > 0)
+            {
+                using (var streamReader = new MemoryStream())
+                {
+                    result.CopyTo(streamReader);
+                    byteArray = streamReader.ToArray();
+                }
+                return byteArray;
+            }
+            return byteArray;
+        }
+
+       
+        private static bool CheckFileExtension(IFormFile formFile)
         {
             List<string> fileExtensions = new List<string> { ".JPEG", ".PNG", ".BMP", ".JPG", ".TIFF", ".SVG" };
-            var fileInfo = new FileInfo(imageFile.FileName);
+            var fileInfo = new FileInfo(formFile.FileName);
             var fileExtension = fileInfo.Extension.ToUpper();
             var result = fileExtensions.Any(f => f == fileExtension);
             if (result)
@@ -95,6 +106,13 @@ namespace Core.Utilities.FileHelpers
             var randomGuid = Guid.NewGuid().ToString("N");
             var createdFileName = randomGuid + fileInfo.Extension;
             return createdFileName;
+        }
+
+        public static byte[] DefaultFileData()
+        {
+            var defaultFileDataPath = FilePathCreator() + "default.png";
+            var getFileData = GetFileData(defaultFileDataPath);
+            return getFileData;
         }
     }
 }

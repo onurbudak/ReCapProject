@@ -37,13 +37,11 @@ namespace Business.Concrete
         public IResult SaveFile(IFormFile formFile, CarImage carImage)
         {
             var result = BusinessRules.Run(CheckIfCarImageLimitExceded(carImage));
-
             if (result != null)
             {
                 return result;
             }
-
-            var imagePath = FileHelper.SaveImage(formFile);
+            var imagePath = FileHelper.SaveFile(formFile);
             if (imagePath != null)
             {
                 carImage.ImagePath = imagePath;
@@ -51,54 +49,70 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
             return new ErrorResult(Messages.FileExtensionInvalid);
+        }
 
+        public IResult UpdateFile(IFormFile formFile, CarImage carImage)
+        {
+            var result = BusinessRules.Run(CheckIfCarImageLimitExceded(carImage));
+            if (result != null)
+            {
+                return result;
+            }
+            var imagePath = FileHelper.UpdateFile(formFile, carImage.ImagePath);
+            if (imagePath != null)
+            {
+                carImage.ImagePath = imagePath;
+                _carImageDal.Update(carImage);
+                return new SuccessResult();
+            }
+            return new ErrorResult(Messages.FilePathInvalid);
         }
         public IResult DeleteFile(CarImage carImage)
         {
-            var isDelete = FileHelper.DeleteImage(carImage.ImagePath);
+            var isDelete = FileHelper.DeleteFile(carImage.ImagePath);
             if (isDelete)
             {
                 _carImageDal.Delete(carImage);
                 return new SuccessResult();
             }
             return new ErrorResult(Messages.FilePathInvalid);
-
-        }
-
-        public IResult UpdateFile(IFormFile formFile, CarImage carImage)
-        {
-            var isDelete = FileHelper.DeleteImage(carImage.ImagePath);
-            if (isDelete)
-            {
-                var imagePath = FileHelper.SaveImage(formFile);
-                if (imagePath != null)
-                {
-                    carImage.ImagePath = imagePath;
-                    _carImageDal.Update(carImage);
-                    return new SuccessResult();
-                }
-                return new ErrorResult();
-            }
-            return new ErrorResult(Messages.FilePathInvalid);
         }
 
         public IDataResult<List<byte[]>> GetFileData(CarImage carImage)
         {
+            var defaultOrCurrentFileData = GetDefaultOrCurrentFileData(carImage);
+            if(defaultOrCurrentFileData.Count > 0)
+            {
+                return new ErrorDataResult<List<byte[]>>(defaultOrCurrentFileData);
+            }
+            return new ErrorDataResult<List<byte[]>>(defaultOrCurrentFileData);
+        }
+
+        private List<byte[]> GetDefaultOrCurrentFileData(CarImage carImage)
+        {
             List<byte[]> carImageViewList = new List<byte[]>();
             var carImageDatas = _carImageDal.GetAll(c => c.CarId == carImage.CarId);
-            if (carImageDatas.Count > 0)
+            if (carImageDatas.Count == 0)
+            {
+                var defaultFileData = FileHelper.DefaultFileData();
+                if (defaultFileData.Length > 0)
+                {
+                    carImageViewList.Add(defaultFileData);
+                }
+                return carImageViewList;
+            }
+            else
             {
                 foreach (var carImageData in carImageDatas)
                 {
-                    var result = FileHelper.GetFileData(carImageData.ImagePath);
-                    if (result.Length > 0)
+                    var getFileData = FileHelper.GetFileData(carImageData.ImagePath);
+                    if (getFileData.Length > 0)
                     {
-                        carImageViewList.Add(result);
+                        carImageViewList.Add(getFileData);
                     }
                 }
-                return new SuccessDataResult<List<byte[]>>(carImageViewList);
+                return carImageViewList;
             }
-            return new ErrorDataResult<List<byte[]>>(carImageViewList);
         }
 
         public IDataResult<CarImage> Get(int id)
