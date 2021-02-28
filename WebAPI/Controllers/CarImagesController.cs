@@ -63,6 +63,10 @@ namespace WebAPI.Controllers
         [HttpPost("saveFile")]
         public IActionResult SaveFile(IFormFile formFile, [FromForm] CarImage carImage)
         {
+            if (formFile == null)
+            {
+                return BadRequest("Lütfen Resim Seçiniz");
+            }
             var result = _carImageService.SaveFile(formFile, carImage);
             if (result.Success)
             {
@@ -85,6 +89,10 @@ namespace WebAPI.Controllers
         [HttpPost("updateFile")]
         public IActionResult UpdateFile(IFormFile formFile, [FromForm] CarImage carImage)
         {
+            if (formFile == null)
+            {
+                return BadRequest("Lütfen Resim Seçiniz");
+            }
             var result = _carImageService.UpdateFile(formFile, carImage);
             if (result.Success)
             {
