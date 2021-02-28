@@ -38,15 +38,15 @@ namespace Business.Concrete
         {
             var result = BusinessRules.Run(CheckIfCarImageLimitExceded(carImage));
 
-            if(result != null)
+            if (result != null)
             {
                 return result;
             }
 
             var imagePath = FileHelper.SaveImage(formFile);
-            if(imagePath.Result != null)
+            if (imagePath != null)
             {
-                carImage.ImagePath = imagePath.Result;
+                carImage.ImagePath = imagePath;
                 _carImageDal.Add(carImage);
                 return new SuccessResult();
             }
@@ -61,28 +61,32 @@ namespace Business.Concrete
                 _carImageDal.Delete(carImage);
                 return new SuccessResult();
             }
-            return new ErrorResult();
+            return new ErrorResult(Messages.FilePathInvalid);
 
         }
 
         public IResult UpdateFile(IFormFile formFile, CarImage carImage)
         {
             var isDelete = FileHelper.DeleteImage(carImage.ImagePath);
-            var imagePath = FileHelper.SaveImage(formFile);
-            if (imagePath.Result != null && isDelete)
+            if (isDelete)
             {
-                carImage.ImagePath = imagePath.Result;
-                _carImageDal.Update(carImage);
-                return new SuccessResult();
+                var imagePath = FileHelper.SaveImage(formFile);
+                if (imagePath != null)
+                {
+                    carImage.ImagePath = imagePath;
+                    _carImageDal.Update(carImage);
+                    return new SuccessResult();
+                }
+                return new ErrorResult();
             }
-            return new ErrorResult();
+            return new ErrorResult(Messages.FilePathInvalid);
         }
 
         public IDataResult<List<Stream>> GetFileData(List<IFormFile> formFile, CarImage carImage)
         {
             List<Stream> carImageViewList = new List<Stream>();
             var carImageDatas = _carImageDal.GetAll(c => c.CarId == carImage.CarId);
-            if(carImageDatas.Count > 0)
+            if (carImageDatas.Count > 0)
             {
                 foreach (var carImageData in carImageDatas)
                 {

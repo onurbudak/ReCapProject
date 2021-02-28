@@ -31,9 +31,9 @@ namespace Core.Utilities.FileHelpers
             return result;
         }
 
-        public static async Task<string> SaveImage(IFormFile formFile)
+        public static string SaveImage(IFormFile formFile)
         {
-            if (formFile.FileName != null)
+            if (formFile != null)
             {
                 var extension = CheckFileExtension(formFile);
                 if (extension)
@@ -44,8 +44,8 @@ namespace Core.Utilities.FileHelpers
                     var fullFilePath = filePath + fileName;
                     using (var fileStream = File.Create(fullFilePath))
                     {
-                        await formFile.CopyToAsync(fileStream);
-                        await fileStream.FlushAsync();
+                        formFile.CopyTo(fileStream);
+                        fileStream.Flush();
                     }
                     return fullFilePath;
                 }
