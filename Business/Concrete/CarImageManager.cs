@@ -83,7 +83,7 @@ namespace Business.Concrete
             var defaultOrCurrentFileData = GetDefaultOrCurrentFileData(carImage);
             if(defaultOrCurrentFileData.Count > 0)
             {
-                return new ErrorDataResult<List<byte[]>>(defaultOrCurrentFileData);
+                return new SuccessDataResult<List<byte[]>>(defaultOrCurrentFileData);
             }
             return new ErrorDataResult<List<byte[]>>(defaultOrCurrentFileData);
         }
