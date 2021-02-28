@@ -85,16 +85,16 @@ namespace Core.Utilities.FileHelpers
         {
             var fileRootName = @"\wwwroot\Images\";
             var fileRootPath = Directory.GetCurrentDirectory();
-            var filePath = fileRootPath + fileRootName;
-            return filePath;
+            var createdFilePath = fileRootPath + fileRootName;
+            return createdFilePath;
         }
 
         private static string FileNameCreator(string fileName)
         {
             var fileInfo = new FileInfo(fileName);
             var randomGuid = Guid.NewGuid().ToString("N");
-            var creatorFileName = randomGuid + fileInfo.Extension;
-            return creatorFileName;
+            var createdFileName = randomGuid + fileInfo.Extension;
+            return createdFileName;
         }
     }
 }
