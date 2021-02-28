@@ -96,7 +96,7 @@ namespace Business.Concrete
             if (carImageDatas.Count == 0)
             {
                 var defaultFileData = FileHelper.DefaultFileData();
-                if (defaultFileData.Length > 0)
+                if (defaultFileData != null)
                 {
                     carImageViewList.Add(defaultFileData);
                 }
@@ -107,7 +107,7 @@ namespace Business.Concrete
                 foreach (var carImageData in carImageDatas)
                 {
                     var getFileData = FileHelper.GetFileData(carImageData.ImagePath);
-                    if (getFileData.Length > 0)
+                    if (getFileData != null)
                     {
                         carImageViewList.Add(getFileData);
                     }
