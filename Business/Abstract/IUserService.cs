@@ -8,10 +8,8 @@ namespace Business.Abstract
 {
     public interface IUserService
     {
-        IResult Add(User entity);
-        IResult Update(User entity);
-        IResult Delete(User entity);
-        IDataResult<List<User>> GetAll();
-        IDataResult<User> Get(int id);
+        IDataResult<List<OperationClaim>> GetClaims(User user);
+        IResult Add(User user);
+        IDataResult<User> GetByMail(string email);
     }
 }

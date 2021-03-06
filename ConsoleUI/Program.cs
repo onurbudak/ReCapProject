@@ -59,12 +59,12 @@ namespace ConsoleUI
 
         private static void UserCrudMethods()
         {
-            UserManager userManager = new UserManager(new EfUserDal());
-            var result = userManager.GetAll();
-            foreach (var user in result.Data)
-            {
-                Console.WriteLine("{0} {1} {2} {3} ", user.Id, user.FirstName, user.LastName, user.Email);
-            }
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    var result = userManager..GetAll();
+        //    foreach (var user in result.Data)
+        //    {
+        //        Console.WriteLine("{0} {1} {2} {3} ", user.Id, user.FirstName, user.LastName, user.Email);
+        //    }
         }
 
         private static void GetCarDetailsTest()

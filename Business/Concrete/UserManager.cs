@@ -1,5 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Absract;
@@ -12,51 +11,26 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
+
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
         }
 
-        public IResult Add(User entity)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            if (entity.FirstName.Length > 2)
-            {
-                _userDal.Add(entity);
-                return new SuccessResult(Messages.UserAdded);
-            }
-            return new ErrorResult(Messages.UserNameInvalid);
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 
-        public IResult Delete(User entity)
+        public IResult Add(User user)
         {
-            if (entity.FirstName.Length > 2)
-            {
-                _userDal.Delete(entity);
-                return new SuccessResult(Messages.UserDeleted);
-            }
-            return new ErrorResult(Messages.UserNameInvalid);
+             _userDal.Add(user);
+            return new SuccessResult();
         }
 
-        public IDataResult<User> Get(int id)
+        public IDataResult<User> GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(r => r.Id == id), Messages.UserListed);
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-   
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UserListed);
-
-        }
-
-        public IResult Update(User entity)
-        {
-            if (entity.FirstName.Length > 2)
-            {
-                _userDal.Update(entity);
-                return new SuccessResult(Messages.UserUpdated);
-            }
-            return new ErrorResult(Messages.UserNameInvalid);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
     }
 }
