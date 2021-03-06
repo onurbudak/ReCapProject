@@ -1,8 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Absract;
-using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +19,7 @@ namespace Business.Concrete
 
         public IResult Add(User entity)
         {
-            if (entity.Firstname.Length > 2)
+            if (entity.FirstName.Length > 2)
             {
                 _userDal.Add(entity);
                 return new SuccessResult(Messages.UserAdded);
@@ -29,7 +29,7 @@ namespace Business.Concrete
 
         public IResult Delete(User entity)
         {
-            if (entity.Firstname.Length > 2)
+            if (entity.FirstName.Length > 2)
             {
                 _userDal.Delete(entity);
                 return new SuccessResult(Messages.UserDeleted);
@@ -51,7 +51,7 @@ namespace Business.Concrete
 
         public IResult Update(User entity)
         {
-            if (entity.Firstname.Length > 2)
+            if (entity.FirstName.Length > 2)
             {
                 _userDal.Update(entity);
                 return new SuccessResult(Messages.UserUpdated);

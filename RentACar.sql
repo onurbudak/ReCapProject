@@ -25,11 +25,26 @@ CREATE TABLE [dbo].[Cars] (
 );
 
 CREATE TABLE [dbo].[Users] (
-    [Id]        INT           IDENTITY (1, 1) NOT NULL,
-    [FirstName] NVARCHAR (50) NULL,
-    [LastName]  NVARCHAR (50) NULL,
-    [Email]     NVARCHAR (50) NULL,
-    [Password]  NVARCHAR (50) NULL,
+    [Id]           INT             IDENTITY (1, 1) NOT NULL,
+    [FirstName]    VARCHAR (50)    NOT NULL,
+    [LastName]     VARCHAR (50)    NOT NULL,
+    [Email]        VARCHAR (50)    NOT NULL,
+    [PasswordHash] VARBINARY (500) NOT NULL,
+    [PasswordSalt] VARBINARY (500) NOT NULL,
+    [Status]       BIT             NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[OperationClaims] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Name] VARCHAR (250) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[UserOperationClaims] (
+    [Id]               INT IDENTITY (1, 1) NOT NULL,
+    [UserId]           INT NOT NULL,
+    [OperationClaimId] INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -76,20 +91,4 @@ INSERT INTO Cars(BrandId,ColorId,CarName,ModelYear,DailyPrice,Descriptions) VALU
 	(1,2,'Egea','2015',250,'Dizel'),
 	(2,1,'Accent','2017',400,'Benzin'),
 	(2,2,'i20','2019',625,'Dizel');
-	
-INSERT INTO Users(FirstName,LastName,Email,Password) VALUES
-	('Ali','Şahin','alisahin@email.com','ali2021'),
-	('Büşra','Yelkenli','busrayelkenli@gmail.com','busra2021'),
-	('Temel','Dursun','temeldursun@gmail.com','temel2021');
-	
-INSERT INTO Customers(UserId,CompanyName) VALUES
-	(1,'Teda A.'),
-	(2,'Ovonel A.'),
-	(3,'Simya A.');
-
-INSERT INTO Rentals(CarId,CustomerId,RentDate,ReturnDate) VALUES
-	(1,1,'2021-01-05','2021-01-08'),
-	(2,2,'2021-02-07','2021-02-09'),
-	(3,3,'2021-02-10',null);
-	
 	

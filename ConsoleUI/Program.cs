@@ -63,7 +63,7 @@ namespace ConsoleUI
             var result = userManager.GetAll();
             foreach (var user in result.Data)
             {
-                Console.WriteLine("{0} {1} {2} {3} {4}", user.Id, user.Firstname, user.LastName, user.Email, user.Password);
+                Console.WriteLine("{0} {1} {2} {3} ", user.Id, user.FirstName, user.LastName, user.Email);
             }
         }
 
