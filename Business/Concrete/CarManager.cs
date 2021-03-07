@@ -7,6 +7,7 @@ using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation.FluentValidation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Absract;
 using Entities.Concrete;
@@ -14,6 +15,7 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -32,7 +34,11 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
-           
+            var result = BusinessRules.Run(CheckIfProductNameExist(car.CarName));
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
 
@@ -108,5 +114,16 @@ namespace Business.Concrete
 
             return null;
         }
+
+        private IResult CheckIfProductNameExist(string carName)
+        {
+            var result = _carDal.GetAll(p => p.CarName == carName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.CarNameAlreadyExist);
+            }
+            return new SuccessResult();
+        }
+
     }
 }
