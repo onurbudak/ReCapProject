@@ -27,6 +27,7 @@ namespace ConsoleUI
             //CustomerCrudMehods();
 
             //RentalCrudMethods();
+
         }
 
         private static void RentalCrudMethods()
