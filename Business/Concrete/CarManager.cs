@@ -31,21 +31,21 @@ namespace Business.Concrete
         {
 
             _carDal.Add(car);
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessResult(Messages.CarAdded);
 
         }
 
         public IResult Update(Car car)
         {
             _carDal.Update(car);
-            return new SuccessResult(Messages.ProductUpdated);
+            return new SuccessResult(Messages.CarUpdated);
 
         }
 
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            return new SuccessResult(Messages.ProductDeleted);
+            return new SuccessResult(Messages.CarDeleted);
 
         }
 
@@ -56,7 +56,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
             // iş kodları
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.ProductsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
             //return _carDal.GetAll();
         }
 
