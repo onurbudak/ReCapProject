@@ -32,10 +32,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getRentACarDetail")]
-        public IActionResult GetRentACarDetail()
+        public IActionResult GetRentACarDetail(int carId)
         {
 
-            var result = _rentalService.GetRentACarDetail(1);
+            var result = _rentalService.GetRentACarDetail(carId);
             if (result.Success)
             {
                 return Ok(result);
