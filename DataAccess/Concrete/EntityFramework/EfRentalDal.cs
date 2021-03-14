@@ -28,7 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
                              select new RentalDetailDto
                              {
                                  Id = rental.Id,
-                                 CarName = brand.BrandName,
+                                 CarName = $"{brand.BrandName} {car.CarName}",
                                  CustomerFullName = $"{user.FirstName} {user.LastName}",
                                  DailyPrice = car.DailyPrice,
                                  RentDate = rental.RentDate,
