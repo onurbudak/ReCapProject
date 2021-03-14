@@ -19,17 +19,20 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from rental in filter is null ? context.Rentals : context.Rentals.Where(filter)
                              join car in context.Cars
                              on rental.CarId equals car.Id
+                             join brand in context.Brands
+                             on car.BrandId equals brand.Id
                              join customer in context.Customers
                              on rental.CustomerId equals customer.Id
                              join user in context.Users
                              on customer.UserId equals user.Id
                              select new RentalDetailDto
                              {
-                                  CarName = car.CarName,
-                                  CustomerName = user.FirstName,
-                                  DailyPrice = car.DailyPrice,
-                                  RentDate =rental.RentDate,
-                                  ReturnDate = rental.ReturnDate
+                                 Id = rental.Id,
+                                 CarName = brand.BrandName,
+                                 CustomerFullName = $"{user.FirstName} {user.LastName}",
+                                 DailyPrice = car.DailyPrice,
+                                 RentDate = rental.RentDate,
+                                 ReturnDate = rental.ReturnDate
                              };
 
                 return result.ToList();
