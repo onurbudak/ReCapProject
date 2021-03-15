@@ -92,3 +92,5 @@ INSERT INTO Cars(BrandId,ColorId,CarName,ModelYear,DailyPrice,Descriptions) VALU
 	(2,1,'Accent','2017',400,'Benzin'),
 	(2,2,'i20','2019',625,'Dizel');
 	
+INSERT INTO CarImages(CarId,ImagePath,ImageDate) VALUES
+	(null,'C:\Users\onurb\source\repos\ReCapProject\WebAPI\wwwroot\Images\default.jpeg',null);
