@@ -31,8 +31,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  CarName = $"{brand.BrandName} {car.CarName}",
                                  CustomerFullName = $"{user.FirstName} {user.LastName}",
                                  DailyPrice = car.DailyPrice,
-                                 RentDate = (DateTime)rental.RentDate,
-                                 ReturnDate = (DateTime)rental.ReturnDate
+                                 RentDate = rental.RentDate,
+                                 ReturnDate = rental.ReturnDate
                              };
 
                 return result.ToList();

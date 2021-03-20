@@ -22,17 +22,13 @@ namespace Business.Concrete
         {
 
             var resultDatas = _rentalDal.GetRentACarDetail(r => r.CarId == rental.CarId);
-
             var result = resultDatas.Find(r => r.ReturnDate == null);
-
             if (result == null)
             {
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.RentalAdded);
             }
-
             return new ErrorResult(Messages.RentalNameInvalid);
-
         }
 
         public IResult Delete(Rental rental)
