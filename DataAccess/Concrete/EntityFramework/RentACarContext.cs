@@ -1,17 +1,28 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilities.IoC;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class RentACarContext:DbContext
     {
+        public IConfiguration Configuration { get; }
+
+        public RentACarContext()
+        {
+            Configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=RentACar;Trusted_Connection=true;");
+            var connectionStrings = Configuration.GetConnectionString("Connection");
+            optionsBuilder.UseSqlServer(connectionStrings);
         }
 
         public DbSet<Car> Cars { get; set; }
