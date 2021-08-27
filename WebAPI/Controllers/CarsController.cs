@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,18 @@ namespace WebAPI.Controllers
             _carService = carService;
         }
 
+        //[HttpGet("getall")]
+        //public IDataResult<List<Car>> GetAll()
+        //{
+
+        //    var result = _carService.GetAll();
+        //    if (result.Success)
+        //    {
+        //        return result;
+        //    }
+        //    return result;
+        //}
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -31,6 +44,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpGet("getCarsByBrandId")]
         public IActionResult GetCarsByBrandId(int brandId)
         {
@@ -42,6 +56,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpGet("getCarsByColorId")]
         public IActionResult GetCarsByColorId(int colorId)
         {
