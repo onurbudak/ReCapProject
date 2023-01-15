@@ -16,7 +16,6 @@ namespace WebAPI.Controllers
     {
         ICarService _carService;
 
-
         public CarsController(ICarService carService)
         {
             _carService = carService;
@@ -45,6 +44,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
 
         [HttpGet("getCarsByBrandId")]
         public IActionResult GetCarsByBrandId(int brandId)
